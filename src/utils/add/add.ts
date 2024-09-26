@@ -1,33 +1,20 @@
 export function add(numbers: string): number {
-    if (numbers === "") return 0;
-  
-    let delimiter = /,|\n/;
-    const customDelimiter = numbers.match(/^\/\/(.+)\n/);
-  
-    if (customDelimiter) {
-      delimiter = new RegExp(customDelimiter[1]);
-      numbers = numbers.split("\n").slice(1).join("");
-    }
-  
-    const numArray = numbers.split(delimiter);
-    const negatives: number[] = [];
-    let sum = 0;
-  
-    for (const num of numArray) {
-      const intNum = parseInt(num);
-      if (isNaN(intNum)) continue;
-  
-      if (intNum < 0) {
-        negatives.push(intNum);
-      } else {
-        sum += intNum;
-      }
-    }
-  
-    if (negatives.length > 0) {
-      throw new Error(`Negative numbers not allowed: ${negatives.join(", ")}`);
-    }
-  
-    return sum;
+  if (!numbers) return 0;
+
+  let delimiter = /[,\n,\\n]/;
+  const customDelimiter = numbers.match(/^\/\/(.*?)(?=\\n)/);
+  if (customDelimiter) {
+    const delimiterString = customDelimiter[0].slice(2, -1);
+    delimiter = new RegExp(
+      delimiterString.split("][").map(d => d.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')).join("|")
+    );
+    numbers = numbers.slice(customDelimiter[0].length);
   }
-  
+
+  const numArray = numbers.split(delimiter).map(Number);
+  const negatives = numArray.filter(n => n < 0);
+
+  if (negatives.length) throw new Error(`Negative numbers not allowed: ${negatives.join(", ")}`);
+
+  return numArray.reduce((sum, n) => sum + (n >= 0 ? n : 0), 0);
+}

@@ -5,7 +5,7 @@ import ResultDisplay from '../result-display'
 import ErrorDisplay from '../error-display'
 
 const Calculator: React.FC = () => {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState<string>('');
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState<string | null>(null);
 
