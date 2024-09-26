@@ -1,26 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-slate-900">
+      <h1 className="text-4xl font-bold text-center mt-8">String Calculator</h1>
+      <p className="text-gray-600 text-lg text-center mt-4 max-w-2xl">
+        Enter numbers separated by commas or new lines. You can also specify a custom delimiter.
+      </p>
     </div>
   );
-}
+};
 
 export default App;
