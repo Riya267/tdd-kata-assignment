@@ -2,7 +2,7 @@ export function add(numbers: string): number {
   if (!numbers) return 0;
 
   let delimiter = /[,\n,\\n]/;
-  const customDelimiter = numbers.match(/^\/\/(.*?)(?=\\n)/);
+  const customDelimiter = numbers.match(/^\/\/(.*?)(?=[\\n,\n])/);
   if (customDelimiter) {
     const delimiterString = customDelimiter[0].slice(2, -1);
     delimiter = new RegExp(
