@@ -1,0 +1,30 @@
+name: String Calculator Workflow
+on:
+  push:
+    branches:
+      - master
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Deploy to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+        run: |
+          # Create a temporary directory for deployment
+          mkdir stringcalculator
+          # Copy everything except the deployment directory into the temporary directory
+          rsync -av --exclude='stringcalculator' . stringcalculator/
+          # Navigate to the temporary directory
+          cd stringcalculator
+          # Pull Vercel Environment Information
+          vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+          # Deploy to Vercel with prebuilt option
+          vercel deploy --prod --token=$VERCEL_TOKEN --yes
+      - name: Clean Up
+        run: |
+          rm -rf riyadhawan
+          npm cache clean --force
