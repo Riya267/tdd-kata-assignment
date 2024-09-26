@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# String Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project implements a simple string calculator that takes a string of comma-separated numbers (and supports additional features) and returns their sum. The calculator can handle various input formats, including custom delimiters and new line-separated numbers.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+1. **Basic Addition**: 
+   - Input: A string of comma-separated numbers.
+   - Output: An integer, representing the sum of the numbers.
 
-### `npm start`
+   **Examples**:
+   - Input: `""` → Output: `0`
+   - Input: `"1"` → Output: `1`
+   - Input: `"1,5"` → Output: `6`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+2. **Multiple Numbers**: 
+   - The `add` method can handle any amount of numbers.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+3. **New Line Support**: 
+   - The `add` method can handle new lines between numbers. For example:
+     - Input: `"1\n2,3"` → Output: `6`
 
-### `npm test`
+4. **Custom Delimiters**: 
+   - To change the delimiter, the beginning of the string will contain a separate line that looks like this: 
+     - `"//[delimiter]\n[numbers…]"`
+   - Example: `"//;\n1;2"` where the delimiter is `";"` should return `3`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+5. **Negative Number Handling**: 
+   - Calling `add` with a negative number will throw an exception with the message: 
+     - `"negative numbers not allowed <negative_number>"`
+   - If there are multiple negative numbers, they will all be included in the exception message, separated by commas.
 
-### `npm run build`
+### Installation
+To get started with this project, follow these steps:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+#### Clone the Repository
+````
+git clone https://github.com/Riya267/tdd-string-calculator-assignment.git
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+cd string-calculator
+````
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+#### Install Dependencies
 
-### `npm run eject`
+After cloning the repository, install the necessary dependencies:
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+````
+npm install
+````
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+#### Start the Development Server
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+You can now start the development server:
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+````
+npm start
+````
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The app should now be running on http://localhost:3000.
