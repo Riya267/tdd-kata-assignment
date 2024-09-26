@@ -1,4 +1,5 @@
 import React from 'react';
+import Calculator from './components/calculator';
 
 const App: React.FC = () => {
   return (
@@ -8,6 +9,7 @@ const App: React.FC = () => {
       <p className="text-gray-600 text-lg text-center mt-4 max-w-2xl">
         Enter numbers separated by commas or new lines. You can also specify a custom delimiter.
       </p>
+      <Calculator />
     </div>
   );
 };
